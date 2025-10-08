@@ -19,12 +19,15 @@ class Mode(Enum):
     HYBRID = 1
     DEVICE = 2
     NONE = 3
+    CLIENT = 4
+    SERVER = 5
+
+
 
 def main()->None:
 
-
     # DEFULT MODE
-    mode: int = Mode.NONE
+    mode: Mode = Mode.NONE
 
 
     # Commandline arg setup
@@ -33,6 +36,8 @@ def main()->None:
     argParser.add_argument("mode", type=str, help="Operating mode for script.",)
 
     argParser.add_argument("ip", type=str, help="IP address of forward device.\n IP of Controller for Devices, IP of Broker for Controller/Hybrid.")
+
+    argParser.add_argument("port", type=str, help="Port of forward device.\n IP of Controller for Devices, IP of Broker for Controller/Hybrid.")
 
     args = argParser.parse_args()
 
@@ -45,8 +50,13 @@ def main()->None:
             mode = Mode.HYBRID
         case "device":
             mode = Mode.DEVICE
+        case "client":
+            mode = Mode.CLIENT
+        case "server":
+            mode = Mode.SERVER
         case _:
             mode = Mode.NONE
+
 
     if(mode == Mode.NONE):
         raise ValueError("Invalid mode provided.")
@@ -63,6 +73,15 @@ def main()->None:
 
 
     print(f"Upstream ip address set as {ipAddr}...")
+
+
+    if(mode == Mode.SERVER):
+        runServer(str(ipAddr), int(args.port))
+    elif(mode == Mode.CLIENT):
+        runClient(str(ipAddr), int(args.port))
+    else:
+        print("Mode not implemented.")
+
 
 
 
