@@ -132,14 +132,18 @@ def runClient(ip:str, port:int)->int:
     clientSendThread.start()
     clientReceiveTread.start()
 
-    while True:
-        stdin = input("")
+    try:
+        while True:
+            stdin = input("")
 
-        if(stdin == "exit"):
-            messageQueue.put(None)
-            break
-        if(stdin != ""):
-            messageQueue.put(stdin)
+            if(stdin == "exit"):
+                messageQueue.put(None)
+                print("Termination signal received...")
+                break
+            if(stdin != ""):
+                messageQueue.put(stdin)
+    except KeyboardInterrupt:
+        print("\nCaught keyboard interrupt, exiting...")
 
     sock.close()
 
