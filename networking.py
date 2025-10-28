@@ -13,7 +13,10 @@ from queue import Queue
 
 import time
 
+import parse
 from helper import getFileContent
+from parse import initSensors, parseSensors
+
 
 
 
@@ -132,14 +135,18 @@ def runClient(ip:str, port:int)->int:
     clientSendThread.start()
     clientReceiveTread.start()
 
-    while True:
-        stdin = input("")
+    initSensors()
 
-        if(stdin == "exit"):
+    while True:
+        sensorData = parseSensors()
+
+        if(sensorData == "exit"):
             messageQueue.put(None)
             break
-        if(stdin != ""):
-            messageQueue.put(stdin)
+        if(sensorData != ""):
+            messageQueue.put(sensorData)
+
+    time.sleep(5)
 
     sock.close()
 
