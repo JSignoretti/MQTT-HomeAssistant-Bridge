@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os
-import time
 
 IIO_BASE = "/sys/bus/iio/devices/"
 
@@ -70,28 +69,3 @@ def parse_Data() -> dict:
     # I hate my life
 
     return payload
-
-
-
-
-    while True:
-        print("=" * 40)
-        for label, ch in channels.items():
-            val = read_channel(device_path, ch)
-            if val is not None:
-                if ch == "in_temp":
-                    temp_c = val / 1000.0  # m°C → °C
-                    print(f"{label}: {c_to_f(temp_c):.1f} °F / {temp_c:.2f} °C")
-                elif ch == "in_humidityrelative":
-                    print(f"{label}: {val / 1000.0:.1f} %")
-                elif ch == "in_pressure":
-                    print(f"{label}: {val / 100.0:.1f} hPa")
-                else:
-                    print(f"{label}: {val}")
-            else:
-                print(f"{label}: N/A")
-        print("=" * 40)
-        time.sleep(2)
-
-if __name__ == "__main__":
-    main()
