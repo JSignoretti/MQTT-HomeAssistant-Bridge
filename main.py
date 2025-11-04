@@ -2,7 +2,7 @@
 Kristijan Stojanovski
 10/7/2025
 
-You'll notice that I do static typing, this is just for me and my code editor for bug checking.
+You'll notice that I do static typing, this is just  for me and my code editor for bug checking.
 '''
 
 # LIBRARIES

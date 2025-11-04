@@ -5,15 +5,16 @@ Kristijan Stojanovski
 Various networking functions
 '''
 
+# LIBRARIES
 import socket
 import selectors
 import types
 import threading
 from queue import Queue
 
-import time
-
+# SCRIPTS
 from helper import getFileContent
+import temp as parser
 
 
 
@@ -58,7 +59,6 @@ def service_connection(key, mask):
 
 
 def runServer(ip:str, port:int)->int:
-
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -133,8 +133,10 @@ def runClient(ip:str, port:int)->int:
     clientReceiveTread.start()
 
     try:
+        parser.init()
         while True:
-            stdin = input("")
+            payload = parser.parse_Data()
+            stdin = str(payload)
 
             if(stdin == "exit"):
                 messageQueue.put(None)
