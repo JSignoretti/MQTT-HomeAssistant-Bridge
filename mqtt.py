@@ -76,7 +76,7 @@ def constructControlHeader(packetType: ControlHeaderType, variableHeaderSize: in
     remainingLength = variableHeaderSize + payloadSize
     print(variableHeaderSize)
     print(payloadSize)
-    fixedHeader += int.to_bytes(remainingLength)
+    fixedHeader += remainingLength.to_bytes()
 
     return fixedHeader
 
@@ -97,7 +97,7 @@ def constructVariableHeader(headerFlags: bytes) -> bytearray:
     protocolName = "MQTT".encode("utf-8")
     print(len(protocolName))
 
-    variableHeader += len(protocolName).to_bytes(1, byteorder='big')
+    variableHeader += len(protocolName).to_bytes(2, byteorder='big')
     variableHeader += protocolName
     variableHeader += MQTTProtocolLevel.V3_1_1.to_bytes(1, byteorder='big')
     variableHeader += headerFlags
@@ -158,8 +158,8 @@ class MQTTSocketClient:
         willExists = (will_topic is not None) and (will_payload is not None)
 
         if willExists:
-            variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.WILL_FLAG.to_bytes())
-            variableFlags = bitwiseOrForBytes(variableFlags, will_qos.to_bytes())
+            #variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.WILL_FLAG.to_bytes())
+            #variableFlags = bitwiseOrForBytes(variableFlags, will_qos.to_bytes())
 
             if will_retain:
                 variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.WILL_RETAIN.to_bytes())
@@ -221,6 +221,7 @@ class MQTTSocketClient:
         connectPacket = self.__constructConnectPacket(self.clientID, self.keepalive, self.username, self.password, b"home/bme680/status", b"offline")
 
         print(connectPacket)
+        print(f"Connect Packet Hex: {connectPacket.hex()}")
 
         self.sock.sendall(connectPacket)
         self.last_send = time.time()
