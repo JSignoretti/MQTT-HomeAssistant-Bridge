@@ -6,6 +6,10 @@ import json
 import ssl
 from enum import IntEnum, auto
 
+IP = "192.168.1.119"
+PORT = 1883
+CLIENTID = "TEST"
+
 STOP = Event()
 
 class ControlHeaderType(IntEnum):
