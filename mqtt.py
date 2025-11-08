@@ -150,13 +150,13 @@ class MQTTSocketClient:
         variableFlags = b'\x00'
 
         if clean_start:
-            variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.CLEAN_SESSION.to_bytes()) # cause supporting bitwise operations would make too much sense
+            variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.CLEAN_SESSION.to_bytes(1, "big")) # cause supporting bitwise operations would make too much sense
 
         if username is not None:
-            variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.USERNAME.to_bytes())
+            variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.USERNAME.to_bytes(1, "big"))
 
         if password is not None:
-            variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.PASSWORD.to_bytes())
+            variableFlags = bitwiseOrForBytes(variableFlags, MQTTConnectFlags.PASSWORD.to_bytes(1, "big"))
 
 
         willExists = (will_topic is not None) and (will_payload is not None)
@@ -364,7 +364,7 @@ class MQTTSocketClient:
         bme680topic = "homeassistant/sensor/bme680/state"
 
         dummy_sensor_data = {
-            "Temperature": 24.6,
+            "Temperature": 120,
             "Humidity": 41.3,
             "Pressure": 1012.8,
             "Gas": 12000
