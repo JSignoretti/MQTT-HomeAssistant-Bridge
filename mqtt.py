@@ -358,7 +358,7 @@ class MQTTSocketClient:
         dataFlag = True
 
         for value in sensorData.values():
-            if isinstance(value, (str, None)):
+            if value == "N/A":
                 dataFlag = False
 
         bme680topic = "homeassistant/sensor/bme680/state"
@@ -411,10 +411,10 @@ class MQTTSocketClient:
             payload = json.dumps(dummy_sensor_data)
 
         for topic, config in bme680config.items():
-            self.__publish(topic, json.dumps(config), MQTTFlags.QOS1)
+            self.__publish(topic, json.dumps(config), MQTTFlags.QOS2)
 
-        self.__publish("homeassistant/sensor/bme680/availability", "online", MQTTFlags.QOS1)
-        self.__publish("homeassistant/sensor/bme680/state", payload, MQTTFlags.QOS1)
+        self.__publish("homeassistant/sensor/bme680/availability", "online", MQTTFlags.QOS2)
+        self.__publish("homeassistant/sensor/bme680/state", payload, MQTTFlags.QOS2)
 
 
         for i in range(20, 0, -1):
