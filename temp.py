@@ -52,16 +52,16 @@ def parse_Data():
             if ch == "in_temp":
                 temp_c = float(val) / 1000.0  # m°C → °C
                 data["Temperature"] = round(c_to_f(temp_c), 1)
-                print(f"Temperature: {data['temperature']} °F / {temp_c:.2f} °C")
+                print(f"Temperature: {data['Temperature']} °F / {temp_c:.2f} °C")
             elif ch == "in_humidityrelative":
                 data["Humidity"] = round(float(val) / 1000.0, 1)
-                print(f"Humidity: {data['humidity']} %")
+                print(f"Humidity: {data['Humidity']} %")
             elif ch == "in_pressure":
                 data["Pressure"] = round(float(val) / 100.0, 1)
-                print(f"Pressure: {data['pressure']} hPa")
+                print(f"Pressure: {data['Pressure']} hPa")
             else:
                 data["Gas"] = float(val)
-                print(f"Gas: {data['gas']} Ω")
+                print(f"Gas: {data['Gas']} Ω")
         else:
             print(f"{label.capitalize()}: N/A")
     print("=" * 40)
