@@ -31,6 +31,7 @@ def parse_Data():
 
     except FileNotFoundError:
         print("No IIO devices detected. Falling back to dummy data.")
+
         return {"Temperature": 120,
                 "Humidity": 41.3,
                 "Pressure": 1012.8,
@@ -50,16 +51,16 @@ def parse_Data():
         if val is not None:
             if ch == "in_temp":
                 temp_c = float(val) / 1000.0  # m°C → °C
-                data["temperature"] = round(c_to_f(temp_c), 1)
+                data["Temperature"] = round(c_to_f(temp_c), 1)
                 print(f"Temperature: {data['temperature']} °F / {temp_c:.2f} °C")
             elif ch == "in_humidityrelative":
-                data["humidity"] = round(float(val) / 1000.0, 1)
+                data["Humidity"] = round(float(val) / 1000.0, 1)
                 print(f"Humidity: {data['humidity']} %")
             elif ch == "in_pressure":
-                data["pressure"] = round(float(val) / 100.0, 1)
+                data["Pressure"] = round(float(val) / 100.0, 1)
                 print(f"Pressure: {data['pressure']} hPa")
             else:
-                data["gas"] = float(val)
+                data["Gas"] = float(val)
                 print(f"Gas: {data['gas']} Ω")
         else:
             print(f"{label.capitalize()}: N/A")
