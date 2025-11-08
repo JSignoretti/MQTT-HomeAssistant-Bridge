@@ -97,7 +97,6 @@ def constructVariableHeader(headerFlags: bytes) -> bytearray:
 def constructPayload(self, payload: str) -> bytearray:
     pass
 
-
 class MQTTSocketClient:
     def __init__(self, clientID: str, username: str = None, password: str = None, host: str = "homeassistant", port: int = 1883, tls=False, keepalive=60, timeout=10):
         self.clientID = clientID
@@ -288,6 +287,7 @@ class MQTTSocketClient:
 
     def ping(self):
         pass
+
     def __publish(self, topicLevel: str, topicData, qosLevel: MQTTFlags):
         constructedTopics = {}
 
@@ -349,26 +349,14 @@ class MQTTSocketClient:
             self.__connect()
         except Exception as e:
             print(f"Failed to connect to MQTT server at {self.host}:{self.port}. Error: {e}")
+            self.sock.close()
             quit()
+
         print("connection succeeded")
 
-        temp.init()
         sensorData = temp.parse_Data()
 
-        dataFlag = True
-
-        for value in sensorData.values():
-            if value == "N/A":
-                dataFlag = False
-
         bme680topic = "homeassistant/sensor/bme680/state"
-
-        dummy_sensor_data = {
-            "Temperature": 120,
-            "Humidity": 41.3,
-            "Pressure": 1012.8,
-            "Gas": 12000
-        }
 
         bme680config = {
             "homeassistant/sensor/bme680_temperature/config": {
@@ -405,16 +393,14 @@ class MQTTSocketClient:
             }
         }
 
-        if dataFlag:
-            payload = json.dumps(sensorData)
-        else:
-            payload = json.dumps(dummy_sensor_data)
+        payload = json.dumps(sensorData)
+
 
         for topic, config in bme680config.items():
-            self.__publish(topic, json.dumps(config), MQTTFlags.QOS2)
+            self.__publish(topic, json.dumps(config), MQTTFlags.QOS1)
 
-        self.__publish("homeassistant/sensor/bme680/availability", "online", MQTTFlags.QOS2)
-        self.__publish("homeassistant/sensor/bme680/state", payload, MQTTFlags.QOS2)
+        self.__publish("homeassistant/sensor/bme680/availability", "online", MQTTFlags.QOS1)
+        self.__publish("homeassistant/sensor/bme680/state", payload, MQTTFlags.QOS1)
 
 
         for i in range(20, 0, -1):
@@ -422,9 +408,6 @@ class MQTTSocketClient:
             time.sleep(1)
 
         self.__disconnect()
-
-
-
 
 
 client = MQTTSocketClient(CLIENTID, username="oniic", password="Saltersimp5904", host=HOST, port=PORT)
