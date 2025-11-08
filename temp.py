@@ -50,7 +50,7 @@ def parse_Data():
         val = read_channel(device_path, ch)
         if val is not None:
             if ch == "in_temp":
-                temp_c = float(val) / 100.0  # m°C → °C
+                temp_c = float(val) / 1000.0  # m°C → °C
                 data["Temperature"] = round(c_to_f(temp_c), 1)
                 print(f"Temperature: {data['Temperature']} °F / {temp_c:.2f} °C")
             elif ch == "in_humidityrelative":
