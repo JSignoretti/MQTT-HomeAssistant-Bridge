@@ -1,3 +1,15 @@
+"""
+@mainpage Python MQTT–Home Assistant Bridge
+
+This project is a Python-based MQTT bridge for Home Assistant.
+
+It:
+- Connects to an MQTT broker
+- Publishes sensor data or state changes
+- Follows Home Assistant’s MQTT discovery conventions
+- Provides a simple, scriptable way to expose devices to Home Assistant
+"""
+
 import socket
 import time
 from threading import Event
@@ -9,6 +21,7 @@ import temp
 
 IIO_ATTRIBUTES = {'current_timestamp_clock': ('mA', 1), 'in_intensity_sampling_frequency': (float, 1), 'in_voltageY_raw': ('mV', 1), 'in_voltageY_supply_raw': ('mV', 1), 'in_voltageY-voltageZ_raw': ('mV', 1), 'in_altvoltageY_rms_raw': ('mV', 1), 'in_powerY_raw': ('W', 0.001), 'in_powerY_active_raw': ('W', 0.001), 'in_powerY_reactive_raw': ('W', 0.001), 'in_powerY_apparent_raw': ('W', 0.001), 'in_powerY_powerfactor': ('W', 0.001), 'in_temp_raw': ('°C', 0.001), 'in_tempY_raw': ('°C', 0.001), 'in_temp_x_raw': ('°C', 0.001), 'in_temp_y_raw': ('°C', 0.001), 'in_temp_ambient_raw': ('°C', 0.001), 'in_temp_object_raw': ('°C', 0.001), 'in_tempY_input': ('°C', 0.001), 'in_temp_input': ('°C', 0.001), 'in_accel_x_raw': ('m/s', 1), 'in_accel_y_raw': ('m/s', 1), 'in_accel_z_raw': ('m/s', 1), 'in_accel_linear_x_raw': ('m/s', 1), 'in_accel_linear_y_raw': ('m/s', 1), 'in_accel_linear_z_raw': ('m/s', 1), 'in_gravity_x_raw': ('m/s', 1), 'in_gravity_y_raw': ('m/s', 1), 'in_gravity_z_raw': ('m/s', 1), 'in_deltaangl_x_raw': (float, 57.29577951308232), 'in_deltaangl_y_raw': (float, 57.29577951308232), 'in_deltaangl_z_raw': (float, 57.29577951308232), 'in_deltavelocity_x_raw': ('m/s', 1), 'in_deltavelocity_y_raw': ('m/s', 1), 'in_deltavelocity_z_raw': ('m/s', 1), 'in_angl_raw': (float, 57.29577951308232), 'in_anglY_raw': (float, 57.29577951308232), 'in_anglvel_x_raw': ('m/s', 57.29577951308232), 'in_anglvel_y_raw': ('m/s', 57.29577951308232), 'in_anglvel_z_raw': ('m/s', 57.29577951308232), 'in_incli_x_raw': (float, 1), 'in_incli_y_raw': (float, 1), 'in_incli_z_raw': (float, 1), 'in_magn_x_raw': (float, 1), 'in_magn_y_raw': (float, 1), 'in_magn_z_raw': (float, 1), 'in_accel_x_peak_raw': ('m/s', 1), 'in_accel_y_peak_raw': ('m/s', 1), 'in_accel_z_peak_raw': ('m/s', 1), 'in_humidityrelative_peak_raw': ('%', 1), 'in_temp_peak_raw': ('°C', 0.001), 'in_humidityrelative_trough_raw': ('%', 1), 'in_temp_trough_raw': ('°C', 0.001), 'in_accel_xyz_squared_peak_raw': ('m/s', 1), 'in_humidityrelative_raw': ('%', 1), 'in_humidityrelative_input': ('%', 1), 'in_Y_mean_raw': ('float', 1), 'in_activity_still_input': ('%', 1), 'in_activity_walking_input': ('%', 1), 'in_activity_jogging_input': ('%', 1), 'in_activity_running_input': ('%', 1), 'in_distance_input': ('m', 1), 'in_distance_raw': ('m', 1), 'in_proximity_raw': ('m', 1), 'in_proximity_input': ('m', 1), 'in_proximityY_raw': ('m', 1), 'in_illuminance_input': ('lx', 1), 'in_illuminance_raw': ('lx', 1), 'in_illuminanceY_input': ('lx', 1), 'in_illuminanceY_raw': ('lx', 1), 'in_illuminanceY_mean_raw': ('lx', 1), 'in_illuminance_ir_raw': ('lx', 1), 'in_illuminance_clear_raw': ('lx', 1), 'in_intensityY_raw': (float, 1), 'in_intensityY_ir_raw': (float, 1), 'in_intensityY_both_raw': (float, 1), 'in_intensityY_uv_raw': (float, 1), 'in_intensityY_uva_raw': (float, 1), 'in_intensityY_uvb_raw': (float, 1), 'in_intensityY_duv_raw': (float, 1), 'in_intensity_red_raw': (float, 1), 'in_intensity_green_raw': (float, 1), 'in_intensity_blue_raw': (float, 1), 'in_intensity_clear_raw': (float, 1), 'in_uvindex_input': ('UV index', 1), 'in_rot_quaternion_raw': (float, 1), 'in_rot_from_north_magnetic_tilt_comp_raw': (float, 1), 'in_rot_from_north_true_tilt_comp_raw': (float, 1), 'in_rot_from_north_magnetic_raw': (float, 1), 'in_rot_from_north_true_raw': (float, 1), 'in_currentY_raw': ('mA', 1), 'in_currentY_supply_raw': ('mA', 1), 'in_altcurrentY_rms_raw': ('mA', 1), 'in_steps_en': (int, 1), 'in_velocity_sqrt(x^2+y^2+z^2)_input': ('m/s', 1), 'in_velocity_sqrt(x^2+y^2+z^2)_raw': ('m/s', 1), 'in_magn_x_oversampling_ratio': (float, 1), 'in_magn_y_oversampling_ratio': (float, 1), 'in_magn_z_oversampling_ratio': (float, 1), 'in_concentration_raw': ('%', 1), 'in_concentrationY_raw': ('%', 1), 'in_concentration_co2_raw': ('%', 1), 'in_concentrationY_co2_raw': ('%', 1), 'in_concentration_ethanol_raw': ('%', 1), 'in_concentrationY_ethanol_raw': ('%', 1), 'in_concentration_h2_raw': ('%', 1), 'in_concentrationY_h2_raw': ('%', 1), 'in_concentration_o2_raw': ('%', 1), 'in_concentrationY_o2_raw': ('%', 1), 'in_concentration_voc_raw': ('%', 1), 'in_concentrationY_voc_raw': ('%', 1), 'in_resistance_raw': ('ohms', 1), 'in_resistanceY_raw': ('ohms', 1), 'heater_enable': (bool, 1), 'in_ph_raw': (float, 1), 'in_massconcentration_pm1_input': ('µg/m³', 1), 'in_massconcentrationY_pm1_input': ('µg/m³', 1), 'in_massconcentration_pm2p5_input': ('µg/m³', 1), 'in_massconcentrationY_pm2p5_input': ('µg/m³', 1), 'in_massconcentration_pm4_input': ('µg/m³', 1), 'in_massconcentrationY_pm4_input': ('µg/m³', 1), 'in_massconcentration_pm10_input': ('µg/m³', 1), 'in_massconcentrationY_pm10_input': ('µg/m³', 1), 'in_temp_thermocouple_type': (str, 1), 'in_intensity_x_raw': ('W/m²', 1e-09), 'in_intensity_y_raw': ('W/m²', 1e-09), 'in_intensity_z_raw': ('W/m²', 1e-09), 'in_anglY_label': (float, 57.29577951308232), 'in_illuminance_hysteresis_relative': ('%', 1), 'in_intensity_hysteresis_relative': ('%', 1), 'in_powerY_sampling_frequency': ('W', 0.001), 'in_currentY_sampling_frequency': ('mA', 1), 'in_rot_yaw_raw': (float, 1), 'in_rot_pitch_raw': (float, 1), 'in_rot_roll_raw': (float, 1), 'in_colortemp_raw': ('K', 1)}
 
+## Constants
 HOST = "homeassistant"
 PORT = 1883
 CLIENTID = "client-1"
@@ -16,6 +29,8 @@ MAX_QOS_PACKET_ATTEMPTS = 10
 
 STOP = Event()
 
+## Control Header Type Enum.
+# This enum contains the different packet identification flags for the MQTT Protocol.
 class ControlHeaderType(IntEnum):
     CONNECT     = 0x10  # Client → Server
     CONNACK     = 0x20  # Server → Client
@@ -32,6 +47,8 @@ class ControlHeaderType(IntEnum):
     PINGRESP    = 0xD0
     DISCONNECT  = 0xE0
 
+## MQTT Packet Flags Enum.
+# This enum contains the various flags that can be added to a MQTT packet.
 class MQTTFlags(IntEnum):
     RETAIN          = 0x01  # RETAIN = 1 (for PUBLISH)
     QOS1            = 0x02  # QoS level 1
@@ -39,7 +56,9 @@ class MQTTFlags(IntEnum):
     DUP             = 0x08  # DUP flag
     SUBSCRIBE_FLAG  = 0x02  # SUBSCRIBE requires QoS1 (0b0010)
 
+## MQTT Connect Packet Flags Enum.
 # CONNECT flags bitfield (MQTT v3.1.1)
+# This enum contains the varius flags a MQTT CONNECT packet can contain.
 class MQTTConnectFlags(IntEnum):
     RESERVED       = 0x01            # must be 0
     CLEAN_SESSION  = 0x02            # bit 1
@@ -51,17 +70,20 @@ class MQTTConnectFlags(IntEnum):
 class HeaderType(IntEnum):
     CONNECT = 0
 
+## MQTT QOS Flags Enum.
+# This enum contains the flags that identify the QoS level of a packet.
 class MQTTWillQoS(IntEnum):
     QOS0    = (0 & 0x03) << 3   # Little hack to push the numbers in to bits 3 and 4
     QOS1    = (1 & 0x03) << 3
     QOS2    = (2 & 0x03) << 3
 
-
-
+## MQTT Protocol Level Enum.
+# This enum contains the flags that identify the MQTT Protocol version.
+# Can be changed to a constant
 class MQTTProtocolLevel(IntEnum):
     V3_1_1 = 0x04
 
-
+## Function used to create a CONTROLL packet header.
 def constructControlHeader(packetType: ControlHeaderType, variableHeaderSize: int, payloadSize: int, flags: int = 0x00) -> bytearray:
     fixedHeader = bytearray()
 
@@ -73,6 +95,8 @@ def constructControlHeader(packetType: ControlHeaderType, variableHeaderSize: in
 
     return fixedHeader
 
+## Function used to create the CONNECT packet variable header.
+# Will be removed in further versions.
 def constructVariableHeader(headerFlags: bytes) -> bytearray:
 
     '''
@@ -99,8 +123,12 @@ def constructVariableHeader(headerFlags: bytes) -> bytearray:
 def constructPayload(self, payload: str) -> bytearray:
     pass
 
+## MQTT Client Class.
+# This class contains the code responsible for creating a connection
+# to an MQTT broker, along with publishing data to the broker.
 class MQTTSocketClient:
-    def __init__(self, clientID: str, username: str = None, password: str = None, host: str = "homeassistant", port: int = 1883, tls=False, keepalive=60, timeout=10):
+    ## MQTTSocketClient Constructor.
+    def init(self, clientID: str, username: str = None, password: str = None, host: str = "homeassistant", port: int = 1883, tls=False, keepalive=60, timeout=10):
         self.clientID = clientID
         self.username = username
         self.password = password
@@ -115,11 +143,16 @@ class MQTTSocketClient:
         self.connectionTime = None
         self.packet_id = 1
 
-    def __handle_tls(self):
+    ## Function to handle TLS wrapping.
+    # Not yet implemented.
+    def handle_tls(self):
         tlsHandler = ssl.create_default_context()
         return tlsHandler.wrap_socket(self.sock, server_hostname=self.host)
 
-    def __receiveAmountOfBytes(self, n: int) -> bytes:
+    ## Function to receive a packet byte by byte.
+    # Function will receive n amount of bytes and return a full byte array of length n bytes.
+    # n * 8bits
+    def receiveAmountOfBytes(self, n: int) -> bytes:
         packetChunks = []
         receivedBytes = 0
 
@@ -134,18 +167,33 @@ class MQTTSocketClient:
 
         return b''.join(packetChunks)
 
-    def __receive_packet(self) -> tuple[int, bytes]:
-
-        byte1 = self.__receiveAmountOfBytes(1)[0]
+    ## Function to receive an entire packet.
+    # This function extracts the packet type, remaining length of the packet, and its payload.
+    # The function returns the packet type and payload.
+    # MQTT Packet Structure:
+    # ---------------------------------------------
+    # | Fixed Header | Remaining Length | Payload |
+    # ---------------------------------------------
+    def receive_packet(self) -> tuple[int, bytes]:
+        byte1 = self.receiveAmountOfBytes(1)[0]
         packetType = byte1 & 0xF0
 
-        remaining = decodeVarint(self.__receiveAmountOfBytes)
+        remaining = decodeVarint(self.receiveAmountOfBytes)
 
-        payload = self.__receiveAmountOfBytes(remaining) if remaining else b''
+        payload = self.receiveAmountOfBytes(remaining) if remaining else b''
 
         return packetType, payload
 
-    def __constructConnectPacket(self,  client_id: str, keepalive: int, username: str, password: str, will_topic: bytes, will_payload: bytes, will_retain: bool = True, clean_start: bool = True, will_qos: MQTTWillQoS = MQTTWillQoS.QOS1) -> bytes:
+    ## Function to create a MQTT CONNECT Packet
+    # MQTT CONNECT Packet Structure:
+    # --------------------------------------------
+    # | Fixed Header | Variable Header | Payload |
+    # --------------------------------------------
+    # Fixed Header: Packet Type and Flags - 1 Byte. Remaining Length 1-4 Bytes.
+    # Variable Header: Flags - 1 Byte. Keep Alive - 2 Bytes.
+    # Payload: Length Client ID - 2 Bytes. Client ID. Length Username - 2 Bytes. Username. Length Password - 2 Bytes. Password.
+    # Returns the final CONNECT Packet
+    def constructConnectPacket(self,  client_id: str, keepalive: int, username: str, password: str, will_topic: bytes, will_payload: bytes, will_retain: bool = True, clean_start: bool = True, will_qos: MQTTWillQoS = MQTTWillQoS.QOS1) -> bytes:
 
         # Construct CONNECT Packet Variable Header flags
         variableFlags = b'\x00'
@@ -208,13 +256,16 @@ class MQTTSocketClient:
 
         return fixedHeader + variableHeader + payload
 
-    def __constructDisconnectPacket(self) -> bytes:
+    ## Function to create a MQTT DISCONNECT Packet
+    def constructDisconnectPacket(self) -> bytes:
         return bytes([ControlHeaderType.DISCONNECT, 0])
 
-    def __constructPingReqPacket(self) -> bytes:
+    ## Function to create a MQTT PINGREQ Packet
+    def constructPingReqPacket(self) -> bytes:
         return bytes([ControlHeaderType.PINGREQ, 0x00])
 
-    def __constructPublishPacket(self, topic: str, payloadIn: str, qosLevel: MQTTFlags, qosPacketIdentifier: int, duplicate: bool = False) -> bytes:
+    ## Function to construct a PUBLISH Packet.
+    def constructPublishPacket(self, topic: str, payloadIn: str, qosLevel: MQTTFlags, qosPacketIdentifier: int, duplicate: bool = False) -> bytes:
         '''
         Fixed Header                    Variable Header                 Payload
         PacketType - 4 Bits             Topic Name Length - 2 Bytes     Payload Length - 2 Bytes
@@ -247,19 +298,22 @@ class MQTTSocketClient:
 
         return fixedHeader + variableHeader + payload
 
-    def __constructPubRelPacket(self) -> bytes:
+    ## Function to create a MQTT PUBREL Packet
+    def constructPubRelPacket(self) -> bytes:
         return bytes([ControlHeaderType.PUBREL, 0x00])
 
-    def __connect(self):
+    ## Function to create a connection to a MQTT Broker.
+    # Creates a connection to a MQTT Broker and varifies the connection.
+    def connect(self):
 
         self.sock = socket.create_connection((self.host, self.port), self.timeout)
 
         if self.tls:
-            self.sock = self.__handle_tls()
+            self.sock = self.handle_tls()
 
         self.sock.settimeout(self.timeout)
 
-        connectPacket = self.__constructConnectPacket(self.clientID, self.keepalive, self.username, self.password, b"home/bme680/status", b"offline")
+        connectPacket = self.constructConnectPacket(self.clientID, self.keepalive, self.username, self.password, b"home/bme680/status", b"offline")
 
         print(connectPacket)
         print(f"Connect Packet Hex: {connectPacket.hex()}")
@@ -271,26 +325,38 @@ class MQTTSocketClient:
         print("Connect Packet Sent")
 
         # Confirm The Connection
-        connackPacket = self.__receive_packet()
+        connackPacket = self.receive_packet()
 
         if connackPacket[0] == ControlHeaderType.CONNACK:
             print("Connack Packet Received")
 
-        self.sock.sendall(self.__constructPingReqPacket())
-        type, payload = self.__receive_packet()
+        self.sock.sendall(self.constructPingReqPacket())
+        type, payload = self.receive_packet()
         assert type == ControlHeaderType.PINGRESP and payload == b''
 
         print("CONNACK Packet Received")
 
-    def __disconnect(self):
-        self.sock.sendall(self.__constructDisconnectPacket())
+    ## Function to disconnect from a MQTT Broker.
+    # Contains logic to disconnect from a MQTT Broker and free the socket.
+    # Will be refined in future versions.
+    def disconnect(self):
+        self.sock.sendall(self.constructDisconnectPacket())
         self.sock.close()
         self.sock = None
 
     def ping(self):
         pass
 
-    def __publish(self, topicLevel: str, topicData, qosLevel: MQTTFlags):
+    ## Function to publish data to a MQTT topic.
+    # Takes a MQTT topic, a topic data - str, int, float, bool, dict, and a QoS level.
+    # As of now only QoS level 1 is supported and functional.
+    # A PUBLISH packet is constructed using the constructor function.
+    #
+    # QoS 1 Structure:
+    # PUBLISH Packet, Client -> Broker.
+    # PUBACK Packet, Broker -> Client.
+    # Duplicate PUBLISH packets will be sent until the PUBACK is received from the Broker.
+    def publish(self, topicLevel: str, topicData, qosLevel: MQTTFlags):
         constructedTopics = {}
 
         if isinstance(topicData, (str, int, float, bool)):
@@ -304,7 +370,7 @@ class MQTTSocketClient:
 
         for key, value in constructedTopics.items():
             itterations = 1
-            packet = self.__constructPublishPacket(key, value, qosLevel, itterations, False)
+            packet = self.constructPublishPacket(key, value, qosLevel, itterations, False)
 
             if MQTTFlags.QOS1:
                 while True:
@@ -312,7 +378,7 @@ class MQTTSocketClient:
                     print(packet)
                     print(packet.hex())
 
-                    inPacket = self.__receive_packet()
+                    inPacket = self.receive_packet()
 
                     if inPacket[0] == ControlHeaderType.PUBACK:
                         successfulPackets += 1
@@ -324,16 +390,16 @@ class MQTTSocketClient:
                         print(f"Max QoS1 Send Attempts Reached.\nPacket: {packet}")
                         break
 
-                    packet = self.__constructPublishPacket(key, value, qosLevel, itterations, True)
+                    packet = self.constructPublishPacket(key, value, qosLevel, itterations, True)
 
             elif MQTTFlags.QOS2:
                 while True:
                     self.sock.sendall(packet)
-                    inPacket = self.__receive_packet()
+                    inPacket = self.receive_packet()
 
                     if inPacket[0] == ControlHeaderType.PUBREC:
-                        self.sock.sendall(self.__constructPubRelPacket())
-                        inPacket == self.__receive_packet()
+                        self.sock.sendall(self.constructPubRelPacket())
+                        inPacket == self.receive_packet()
                         if inPacket[0] == ControlHeaderType.PUBCOMP:
                             successfulPackets += 1
                             break
@@ -343,12 +409,15 @@ class MQTTSocketClient:
                         print(f"Max QoS1 Send Attempts Reached.\nPacket: {packet}")
                         break
 
-                    packet = self.__constructPublishPacket(key, value, qosLevel, itterations, False)
+                    packet = self.constructPublishPacket(key, value, qosLevel, itterations, False)
 
+    ## Function to run code.
+    # Temporary function to create a connection, verify connection, obtain sensor data, create a payload, publish data, then disconnect.
+    # This function will be removed in further versions in favor of a proper API.
     def run(self):
         print("Starting MQTT Client")
         try:
-            self.__connect()
+            self.connect()
         except Exception as e:
             print(f"Failed to connect to MQTT server at {self.host}:{self.port}. Error: {e}")
             self.sock.close()
@@ -403,18 +472,19 @@ class MQTTSocketClient:
 
 
         for topic, config in bme680config.items():
-            self.__publish(topic, json.dumps(config), MQTTFlags.QOS1)
+            self.publish(topic, json.dumps(config), MQTTFlags.QOS1)
 
-        self.__publish("homeassistant/sensor/bme680/availability", "online", MQTTFlags.QOS1)
-        self.__publish("homeassistant/sensor/bme680/state", payload, MQTTFlags.QOS1)
+        self.publish("homeassistant/sensor/bme680/availability", "online", MQTTFlags.QOS1)
+        self.publish("homeassistant/sensor/bme680/state", payload, MQTTFlags.QOS1)
 
 
         for i in range(20, 0, -1):
             print(f"Stopping in {i}...")
             time.sleep(1)
 
-        self.__disconnect()
+        self.disconnect()
 
-
-client = MQTTSocketClient(CLIENTID, username="oniic", password="Saltersimp5904", host=HOST, port=PORT)
-client.run()
+## Test Code
+if __name__ == "__main__":
+    client = MQTTSocketClient(CLIENTID, username="oniic", password="Saltersimp5904", host=HOST, port=PORT)
+    client.run()

@@ -7,8 +7,7 @@ Various helper functions
 
 import struct
 
-
-
+## Function to return the first line in a file.
 def getFileContent(filename)->str:
     """
     Displays the content of a given file to the console.
@@ -38,10 +37,12 @@ def bitwiseAndForBytes(byte1: bytes, byte2: bytes) -> bytes:
 
     return bytes(result)
 
+## Function to encode a string in network byte order.
 def enc_utf8(s: str) -> bytes:
     b = s.encode("utf-8")
     return struct.pack("!H", len(b)) + b
 
+## Function to encode an integer in network byte order.
 def encodeVarint(n: int) -> bytes:
     out = bytearray()
     while True:
@@ -54,6 +55,7 @@ def encodeVarint(n: int) -> bytes:
             break
     return bytes(out)
 
+## Function to decode an integer from a byte stream.
 def decodeVarint(receive_function) -> int:
     multiplier = 1
     value = 0

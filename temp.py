@@ -1,12 +1,17 @@
 import os
-import time
 
-
+## Constant
+# Specifies the IIO Base folder in Linux
 IIO_BASE = "/sys/bus/iio/devices/"
 
-def c_to_f(c):
+## Helper Function
+# Converts from Celsius to Fahrenheit.
+def c_to_f(c:int):
     return c * 9 / 5 + 32
 
+## Function to find a specific IIO Device
+# Function currently only tests for a specific device and returns it
+# Function will be replaced with proper parsing code in later versions
 def find_iio_device():
     if not os.path.exists(IIO_BASE):
         raise FileNotFoundError(f"No IIO devices found at {IIO_BASE}")
@@ -15,6 +20,8 @@ def find_iio_device():
         raise FileNotFoundError("No IIO devices detected")
     return os.path.join(IIO_BASE, devices[1])
 
+## Function to read various channels from an IIO Device
+# Function will be replaced with proper parsing code in later versions
 def read_channel(device_path, channel_name):
     channel_file = os.path.join(device_path, f"{channel_name}_input")
     if os.path.exists(channel_file):
@@ -23,6 +30,8 @@ def read_channel(device_path, channel_name):
         return value
     return None
 
+## Function to parse data from the BME680 sensor
+# Function will be replaced with proper parsing code in later versions
 def parse_Data():
     device_path = ""
 
