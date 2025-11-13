@@ -2,5 +2,4 @@
 
 Full documentation is available here:
 
-➡️ **[Project Documentation (Markdown)](docs/index.md)**  
-➡️ **[Class: MQTTSocketClient](docs/classes/mqttsocketclient.md)**  
+➡️ **[Project Documentation](docs/index_files.md)**  
