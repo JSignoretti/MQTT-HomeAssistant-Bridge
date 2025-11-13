@@ -409,11 +409,14 @@ class MQTTSocketClient:
                     if inPacket[0] == ControlHeaderType.PUBREC:
                         print("PUBREC Packet Received")
                         self.sock.sendall(self.constructPubRelPacket(itterations + successfulPackets))
-                        inPacket == self.receive_packet()
+                        inPacket = self.receive_packet()
                         if inPacket[0] == ControlHeaderType.PUBCOMP:
                             print("PUBCOMP Packet Received")
                             successfulPackets += 1
                             break
+                        else:
+                            print("PUBCOMP Packet Not Received")
+                            continue
                     else:
                         print("PUBREC Packet Not Received")
                         continue
@@ -493,7 +496,7 @@ class MQTTSocketClient:
             self.publish(topic, json.dumps(config), MQTTFlags.QOS1)
 
         self.publish("homeassistant/sensor/bme680/availability", "online", MQTTFlags.QOS1)
-        self.publish("homeassistant/sensor/bme680/state", payload, MQTTFlags.QOS1)
+        self.publish("homeassistant/sensor/bme680/state", payload, MQTTFlags.QOS2)
 
 
         for i in range(20, 0, -1):
@@ -504,5 +507,5 @@ class MQTTSocketClient:
 
 ## Test Code
 if __name__ == "__main__":
-    client = MQTTSocketClient(CLIENTID, username=USERNAME, password=PASSWORD, host=HOST, port=PORT)
+    client = MQTTSocketClient(CLIENTID, username="oniic", password="Saltersimp5904", host=HOST, port=PORT)
     client.run()
