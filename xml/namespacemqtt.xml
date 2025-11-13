@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.14.0" xml:lang="en-US">
+  <compounddef id="namespacemqtt" kind="namespace" language="Python">
+    <compoundname>mqtt</compoundname>
+    <innerclass refid="classmqtt_1_1ControlHeaderType" prot="public">mqtt::ControlHeaderType</innerclass>
+    <innerclass refid="classmqtt_1_1HeaderType" prot="public">mqtt::HeaderType</innerclass>
+    <innerclass refid="classmqtt_1_1MQTTConnectFlags" prot="public">mqtt::MQTTConnectFlags</innerclass>
+    <innerclass refid="classmqtt_1_1MQTTFlags" prot="public">mqtt::MQTTFlags</innerclass>
+    <innerclass refid="classmqtt_1_1MQTTProtocolLevel" prot="public">mqtt::MQTTProtocolLevel</innerclass>
+    <innerclass refid="classmqtt_1_1MQTTSocketClient" prot="public">mqtt::MQTTSocketClient</innerclass>
+    <innerclass refid="classmqtt_1_1MQTTWillQoS" prot="public">mqtt::MQTTWillQoS</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacemqtt_1aa559f93b4d85feb7698c0a80fbca4859" prot="public" static="no" mutable="no">
+        <type>dict</type>
+        <definition>dict mqtt.IIO_ATTRIBUTES</definition>
+        <argsstring></argsstring>
+        <name>IIO_ATTRIBUTES</name>
+        <qualifiedname>mqtt.IIO_ATTRIBUTES</qualifiedname>
+        <initializer>=  {&apos;current_timestamp_clock&apos;: (&apos;mA&apos;, 1), &apos;in_intensity_sampling_frequency&apos;: (float, 1), &apos;in_voltageY_raw&apos;: (&apos;mV&apos;, 1), &apos;in_voltageY_supply_raw&apos;: (&apos;mV&apos;, 1), &apos;in_voltageY-voltageZ_raw&apos;: (&apos;mV&apos;, 1), &apos;in_altvoltageY_rms_raw&apos;: (&apos;mV&apos;, 1), &apos;in_powerY_raw&apos;: (&apos;W&apos;, 0.001), &apos;in_powerY_active_raw&apos;: (&apos;W&apos;, 0.001), &apos;in_powerY_reactive_raw&apos;: (&apos;W&apos;, 0.001), &apos;in_powerY_apparent_raw&apos;: (&apos;W&apos;, 0.001), &apos;in_powerY_powerfactor&apos;: (&apos;W&apos;, 0.001), &apos;in_temp_raw&apos;: (&apos;°C&apos;, 0.001), &apos;in_tempY_raw&apos;: (&apos;°C&apos;, 0.001), &apos;in_temp_x_raw&apos;: (&apos;°C&apos;, 0.001), &apos;in_temp_y_raw&apos;: (&apos;°C&apos;, 0.001), &apos;in_temp_ambient_raw&apos;: (&apos;°C&apos;, 0.001), &apos;in_temp_object_raw&apos;: (&apos;°C&apos;, 0.001), &apos;in_tempY_input&apos;: (&apos;°C&apos;, 0.001), &apos;in_temp_input&apos;: (&apos;°C&apos;, 0.001), &apos;in_accel_x_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_accel_y_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_accel_z_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_accel_linear_x_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_accel_linear_y_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_accel_linear_z_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_gravity_x_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_gravity_y_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_gravity_z_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_deltaangl_x_raw&apos;: (float, 57.29577951308232), &apos;in_deltaangl_y_raw&apos;: (float, 57.29577951308232), &apos;in_deltaangl_z_raw&apos;: (float, 57.29577951308232), &apos;in_deltavelocity_x_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_deltavelocity_y_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_deltavelocity_z_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_angl_raw&apos;: (float, 57.29577951308232), &apos;in_anglY_raw&apos;: (float, 57.29577951308232), &apos;in_anglvel_x_raw&apos;: (&apos;m/s&apos;, 57.29577951308232), &apos;in_anglvel_y_raw&apos;: (&apos;m/s&apos;, 57.29577951308232), &apos;in_anglvel_z_raw&apos;: (&apos;m/s&apos;, 57.29577951308232), &apos;in_incli_x_raw&apos;: (float, 1), &apos;in_incli_y_raw&apos;: (float, 1), &apos;in_incli_z_raw&apos;: (float, 1), &apos;in_magn_x_raw&apos;: (float, 1), &apos;in_magn_y_raw&apos;: (float, 1), &apos;in_magn_z_raw&apos;: (float, 1), &apos;in_accel_x_peak_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_accel_y_peak_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_accel_z_peak_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_humidityrelative_peak_raw&apos;: (&apos;%&apos;, 1), &apos;in_temp_peak_raw&apos;: (&apos;°C&apos;, 0.001), &apos;in_humidityrelative_trough_raw&apos;: (&apos;%&apos;, 1), &apos;in_temp_trough_raw&apos;: (&apos;°C&apos;, 0.001), &apos;in_accel_xyz_squared_peak_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_humidityrelative_raw&apos;: (&apos;%&apos;, 1), &apos;in_humidityrelative_input&apos;: (&apos;%&apos;, 1), &apos;in_Y_mean_raw&apos;: (&apos;float&apos;, 1), &apos;in_activity_still_input&apos;: (&apos;%&apos;, 1), &apos;in_activity_walking_input&apos;: (&apos;%&apos;, 1), &apos;in_activity_jogging_input&apos;: (&apos;%&apos;, 1), &apos;in_activity_running_input&apos;: (&apos;%&apos;, 1), &apos;in_distance_input&apos;: (&apos;m&apos;, 1), &apos;in_distance_raw&apos;: (&apos;m&apos;, 1), &apos;in_proximity_raw&apos;: (&apos;m&apos;, 1), &apos;in_proximity_input&apos;: (&apos;m&apos;, 1), &apos;in_proximityY_raw&apos;: (&apos;m&apos;, 1), &apos;in_illuminance_input&apos;: (&apos;lx&apos;, 1), &apos;in_illuminance_raw&apos;: (&apos;lx&apos;, 1), &apos;in_illuminanceY_input&apos;: (&apos;lx&apos;, 1), &apos;in_illuminanceY_raw&apos;: (&apos;lx&apos;, 1), &apos;in_illuminanceY_mean_raw&apos;: (&apos;lx&apos;, 1), &apos;in_illuminance_ir_raw&apos;: (&apos;lx&apos;, 1), &apos;in_illuminance_clear_raw&apos;: (&apos;lx&apos;, 1), &apos;in_intensityY_raw&apos;: (float, 1), &apos;in_intensityY_ir_raw&apos;: (float, 1), &apos;in_intensityY_both_raw&apos;: (float, 1), &apos;in_intensityY_uv_raw&apos;: (float, 1), &apos;in_intensityY_uva_raw&apos;: (float, 1), &apos;in_intensityY_uvb_raw&apos;: (float, 1), &apos;in_intensityY_duv_raw&apos;: (float, 1), &apos;in_intensity_red_raw&apos;: (float, 1), &apos;in_intensity_green_raw&apos;: (float, 1), &apos;in_intensity_blue_raw&apos;: (float, 1), &apos;in_intensity_clear_raw&apos;: (float, 1), &apos;in_uvindex_input&apos;: (&apos;UV index&apos;, 1), &apos;in_rot_quaternion_raw&apos;: (float, 1), &apos;in_rot_from_north_magnetic_tilt_comp_raw&apos;: (float, 1), &apos;in_rot_from_north_true_tilt_comp_raw&apos;: (float, 1), &apos;in_rot_from_north_magnetic_raw&apos;: (float, 1), &apos;in_rot_from_north_true_raw&apos;: (float, 1), &apos;in_currentY_raw&apos;: (&apos;mA&apos;, 1), &apos;in_currentY_supply_raw&apos;: (&apos;mA&apos;, 1), &apos;in_altcurrentY_rms_raw&apos;: (&apos;mA&apos;, 1), &apos;in_steps_en&apos;: (int, 1), &apos;in_velocity_sqrt(x^2+y^2+z^2)_input&apos;: (&apos;m/s&apos;, 1), &apos;in_velocity_sqrt(x^2+y^2+z^2)_raw&apos;: (&apos;m/s&apos;, 1), &apos;in_magn_x_oversampling_ratio&apos;: (float, 1), &apos;in_magn_y_oversampling_ratio&apos;: (float, 1), &apos;in_magn_z_oversampling_ratio&apos;: (float, 1), &apos;in_concentration_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentrationY_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentration_co2_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentrationY_co2_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentration_ethanol_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentrationY_ethanol_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentration_h2_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentrationY_h2_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentration_o2_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentrationY_o2_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentration_voc_raw&apos;: (&apos;%&apos;, 1), &apos;in_concentrationY_voc_raw&apos;: (&apos;%&apos;, 1), &apos;in_resistance_raw&apos;: (&apos;ohms&apos;, 1), &apos;in_resistanceY_raw&apos;: (&apos;ohms&apos;, 1), &apos;heater_enable&apos;: (bool, 1), &apos;in_ph_raw&apos;: (float, 1), &apos;in_massconcentration_pm1_input&apos;: (&apos;µg/m³&apos;, 1), &apos;in_massconcentrationY_pm1_input&apos;: (&apos;µg/m³&apos;, 1), &apos;in_massconcentration_pm2p5_input&apos;: (&apos;µg/m³&apos;, 1), &apos;in_massconcentrationY_pm2p5_input&apos;: (&apos;µg/m³&apos;, 1), &apos;in_massconcentration_pm4_input&apos;: (&apos;µg/m³&apos;, 1), &apos;in_massconcentrationY_pm4_input&apos;: (&apos;µg/m³&apos;, 1), &apos;in_massconcentration_pm10_input&apos;: (&apos;µg/m³&apos;, 1), &apos;in_massconcentrationY_pm10_input&apos;: (&apos;µg/m³&apos;, 1), &apos;in_temp_thermocouple_type&apos;: (str, 1), &apos;in_intensity_x_raw&apos;: (&apos;W/m²&apos;, 1e-09), &apos;in_intensity_y_raw&apos;: (&apos;W/m²&apos;, 1e-09), &apos;in_intensity_z_raw&apos;: (&apos;W/m²&apos;, 1e-09), &apos;in_anglY_label&apos;: (float, 57.29577951308232), &apos;in_illuminance_hysteresis_relative&apos;: (&apos;%&apos;, 1), &apos;in_intensity_hysteresis_relative&apos;: (&apos;%&apos;, 1), &apos;in_powerY_sampling_frequency&apos;: (&apos;W&apos;, 0.001), &apos;in_currentY_sampling_frequency&apos;: (&apos;mA&apos;, 1), &apos;in_rot_yaw_raw&apos;: (float, 1), &apos;in_rot_pitch_raw&apos;: (float, 1), &apos;in_rot_roll_raw&apos;: (float, 1), &apos;in_colortemp_raw&apos;: (&apos;K&apos;, 1)}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="22" column="1" bodyfile="mqtt.py" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemqtt_1a179836d6579787e1a3b39ce51dd45ef4" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str mqtt.HOST</definition>
+        <argsstring></argsstring>
+        <name>HOST</name>
+        <qualifiedname>mqtt.HOST</qualifiedname>
+        <initializer>=  &quot;homeassistant&quot;</initializer>
+        <briefdescription>
+<para>Constants. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="25" column="1" bodyfile="mqtt.py" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemqtt_1a26ccc2bc37c45c95e4ff4d89bb7e95d4" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int mqtt.PORT</definition>
+        <argsstring></argsstring>
+        <name>PORT</name>
+        <qualifiedname>mqtt.PORT</qualifiedname>
+        <initializer>=  1883</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="26" column="1" bodyfile="mqtt.py" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemqtt_1aac32062d6a0e9e203ce0dae82513eeeb" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str mqtt.CLIENTID</definition>
+        <argsstring></argsstring>
+        <name>CLIENTID</name>
+        <qualifiedname>mqtt.CLIENTID</qualifiedname>
+        <initializer>=  &quot;client-1&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="27" column="1" bodyfile="mqtt.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemqtt_1a08b3f09de40932d986961e35fc931bd9" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int mqtt.MAX_QOS_PACKET_ATTEMPTS</definition>
+        <argsstring></argsstring>
+        <name>MAX_QOS_PACKET_ATTEMPTS</name>
+        <qualifiedname>mqtt.MAX_QOS_PACKET_ATTEMPTS</qualifiedname>
+        <initializer>=  10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="28" column="1" bodyfile="mqtt.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemqtt_1af17ed5b65540526aca58833d1b4ae38a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>mqtt.STOP</definition>
+        <argsstring></argsstring>
+        <name>STOP</name>
+        <qualifiedname>mqtt.STOP</qualifiedname>
+        <initializer>=  Event()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="30" column="1" bodyfile="mqtt.py" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemqtt_1ac7cfd7b8829013a06f8dcf420ae08bf1" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>mqtt.client</definition>
+        <argsstring></argsstring>
+        <name>client</name>
+        <qualifiedname>mqtt.client</qualifiedname>
+        <initializer>=  <ref refid="classmqtt_1_1MQTTSocketClient" kindref="compound">MQTTSocketClient</ref>(<ref refid="namespacemqtt_1aac32062d6a0e9e203ce0dae82513eeeb" kindref="member">CLIENTID</ref>, username=&quot;oniic&quot;, password=&quot;Saltersimp5904&quot;, host=<ref refid="namespacemqtt_1a179836d6579787e1a3b39ce51dd45ef4" kindref="member">HOST</ref>, port=<ref refid="namespacemqtt_1a26ccc2bc37c45c95e4ff4d89bb7e95d4" kindref="member">PORT</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="489" column="1" bodyfile="mqtt.py" bodystart="489" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacemqtt_1a6b6eac427c4d66abcad65e584fea4194" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bytearray</type>
+        <definition> bytearray mqtt.constructControlHeader</definition>
+        <argsstring>(ControlHeaderType packetType, int variableHeaderSize, int payloadSize, int flags=0x00)</argsstring>
+        <name>constructControlHeader</name>
+        <qualifiedname>mqtt.constructControlHeader</qualifiedname>
+        <param>
+          <type><ref refid="classmqtt_1_1ControlHeaderType" kindref="compound">ControlHeaderType</ref></type>
+          <declname>packetType</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>variableHeaderSize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>payloadSize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0x00</defval>
+        </param>
+        <briefdescription>
+<para>Function used to create a CONTROLL packet header. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="87" column="1" bodyfile="mqtt.py" bodystart="87" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemqtt_1a8cb872e5ab6940e2caf83a3557925e21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bytearray</type>
+        <definition> bytearray mqtt.constructVariableHeader</definition>
+        <argsstring>(bytes headerFlags)</argsstring>
+        <name>constructVariableHeader</name>
+        <qualifiedname>mqtt.constructVariableHeader</qualifiedname>
+        <param>
+          <type>bytes</type>
+          <declname>headerFlags</declname>
+        </param>
+        <briefdescription>
+<para>Function used to create the CONNECT packet variable header. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Will be removed in further versions.</para>
+<para><verbatim>Protocol Name Length 2x bytes
+Protocol Name
+Protocol Level i.e. version
+Content Flag 1x bytes
+Keep Alive
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="100" column="1" bodyfile="mqtt.py" bodystart="100" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemqtt_1a0beb511ac67f22523d2b9e06ad8eb529" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bytearray</type>
+        <definition> bytearray mqtt.constructPayload</definition>
+        <argsstring>(self, str payload)</argsstring>
+        <name>constructPayload</name>
+        <qualifiedname>mqtt.constructPayload</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>str</type>
+          <declname>payload</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mqtt.py" line="123" column="1" bodyfile="mqtt.py" bodystart="123" bodyend="125"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>@mainpage Python MQTT–Home Assistant Bridge
+
+This project is a Python-based MQTT bridge for Home Assistant.
+
+It:
+- Connects to an MQTT broker
+- Publishes sensor data or state changes
+- Follows Home Assistant’s MQTT discovery conventions
+- Provides a simple, scriptable way to expose devices to Home Assistant
+</verbatim> </para>
+    </detaileddescription>
+    <location file="mqtt.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

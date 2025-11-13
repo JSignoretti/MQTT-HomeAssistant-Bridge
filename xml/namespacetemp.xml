@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.14.0" xml:lang="en-US">
+  <compounddef id="namespacetemp" kind="namespace" language="Python">
+    <compoundname>temp</compoundname>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacetemp_1a9e22dfd5021194c79cafbca445d8b9f8" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str temp.IIO_BASE</definition>
+        <argsstring></argsstring>
+        <name>IIO_BASE</name>
+        <qualifiedname>temp.IIO_BASE</qualifiedname>
+        <initializer>=  &quot;/sys/bus/iio/devices/&quot;</initializer>
+        <briefdescription>
+<para>Constant Specifies the IIO Base folder in Linux. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="temp.py" line="5" column="1" bodyfile="temp.py" bodystart="5" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacetemp_1a90712303692480f434af645d86f5343d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>temp.c_to_f</definition>
+        <argsstring>(int c)</argsstring>
+        <name>c_to_f</name>
+        <qualifiedname>temp.c_to_f</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>Helper Function Converts from Celsius to Fahrenheit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="temp.py" line="9" column="1" bodyfile="temp.py" bodystart="9" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacetemp_1ae5c620723e02a05582e2c23181598319" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>temp.find_iio_device</definition>
+        <argsstring>()</argsstring>
+        <name>find_iio_device</name>
+        <qualifiedname>temp.find_iio_device</qualifiedname>
+        <briefdescription>
+<para>Function to find a specific IIO Device Function currently only tests for a specific device and returns it Function will be replaced with proper parsing code in later versions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="temp.py" line="15" column="1" bodyfile="temp.py" bodystart="15" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacetemp_1a68705c87ff69f69a85688dfab01a2d16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>temp.read_channel</definition>
+        <argsstring>(device_path, channel_name)</argsstring>
+        <name>read_channel</name>
+        <qualifiedname>temp.read_channel</qualifiedname>
+        <param>
+          <type>device_path</type>
+          <defname>device_path</defname>
+        </param>
+        <param>
+          <type>channel_name</type>
+          <defname>channel_name</defname>
+        </param>
+        <briefdescription>
+<para>Function to read various channels from an IIO Device Function will be replaced with proper parsing code in later versions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="temp.py" line="25" column="1" bodyfile="temp.py" bodystart="25" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacetemp_1acfaf822180a85cfc9b3d66e3272e845e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>temp.parse_Data</definition>
+        <argsstring>()</argsstring>
+        <name>parse_Data</name>
+        <qualifiedname>temp.parse_Data</qualifiedname>
+        <briefdescription>
+<para>Function to parse data from the BME680 sensor Function will be replaced with proper parsing code in later versions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="temp.py" line="35" column="1" bodyfile="temp.py" bodystart="35" bodyend="79"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="temp.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>
