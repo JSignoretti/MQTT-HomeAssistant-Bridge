@@ -3,7 +3,7 @@ import os
 ## Constant
 # Specifies the IIO Base folder in Linux
 IIO_BASE = "/sys/bus/iio/devices/"
-DEVICE_INDEX = 1
+DEVICE_INDEX = 0
 
 ## Helper Function
 # Converts from Celsius to Fahrenheit.
