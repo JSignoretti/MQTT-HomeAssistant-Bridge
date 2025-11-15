@@ -54,7 +54,7 @@ def find_iio_devices() -> list[Device]:
         raise FileNotFoundError(f"No IIO devices found at {IIO_BASE}")
     _devices = sorted([d for d in os.listdir(IIO_BASE) if d.startswith("iio:device")])
 
-    return [Device(os.path.join(IIO_BASE + device)) for device in _devices]
+    return [Device(os.path.join(IIO_BASE + _device)) for _device in _devices]
 
 if __name__ == "__main__":
     devices = find_iio_devices()
