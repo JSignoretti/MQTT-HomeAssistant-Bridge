@@ -36,8 +36,7 @@ class Device:
         for attr in self.attributes:
             with open(os.path.join(self.devicePath, attr), "r") as f:
                 print(os.path.join(self.devicePath, attr))
-                attributeData = f.readline().strip()
-                print(attributeData)
+                attributeData = f.read().strip()
 
                 try:
                     attributeData = float(attributeData)
@@ -104,4 +103,4 @@ def find_iio_devices() -> list[Device]:
 if __name__ == "__main__":
     devices = find_iio_devices()
 
-    print(devices[1].generateConfigs("test_id"))
+    devices[0].parse()
