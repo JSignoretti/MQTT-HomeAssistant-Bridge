@@ -57,7 +57,7 @@ class Device:
                         data[attr] = round(attributeData * scaleData * IIO_META.get(attr)[1], 2)
 
                 else:
-                    data[attr] = round(attributeData, 2)
+                    data[attr] = round(attributeData * IIO_META.get(attr)[1], 2)
 
             except ValueError:
                 data[attr] = attributeData
