@@ -113,4 +113,4 @@ def find_iio_devices() -> list[Device]:
 if __name__ == "__main__":
     devices = find_iio_devices()
     for d in devices:
-        d.parse()
+        print(d.parse())
