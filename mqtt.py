@@ -309,7 +309,7 @@ class MQTTSocketClient:
 
         self.sock.settimeout(self.timeout)
 
-        connectPacket = self.constructConnectPacket(self.clientID, self.keepalive, self.username, self.password, b"home/bme680/status", b"offline")
+        connectPacket = self.constructConnectPacket(self.clientID, self.keepalive, self.username, self.password, f"home/{CLIENTID}/status".encode("utf-8"), b"offline")
 
         print(connectPacket)
         print(f"Connect Packet Hex: {connectPacket.hex()}")
