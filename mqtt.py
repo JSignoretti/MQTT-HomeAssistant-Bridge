@@ -439,7 +439,16 @@ class MQTTSocketClient:
                 self.publish(topic, json.dumps(config), MQTTFlags.QOS1)
 
             self.publish(device.availabilityTopic, "online", MQTTFlags.QOS1)
-            self.publish(device.stateTopic, json.dumps(device.parse()), MQTTFlags.QOS1)
+            while True:
+                try:
+                    parsed_device_data = device.parse()
+                    break
+
+                except OSError as e:
+                    print(f"Failed to read device {device.name}. Error: {e}. Retrying in 1 second...")
+                    time.sleep(1)
+
+            self.publish(device.stateTopic, json.dumps(parsed_device_data), MQTTFlags.QOS1)
 
 
     ## Function to run code.
