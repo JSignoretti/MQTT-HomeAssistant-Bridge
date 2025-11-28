@@ -474,5 +474,5 @@ class MQTTSocketClient:
 
 ## Test Code
 if __name__ == "__main__":
-    client = MQTTSocketClient(CLIENTID, username="oniic", password="Saltersimp5904", host=HOST, port=PORT)
+    client = MQTTSocketClient(CLIENTID, username=USERNAME, password=PASSWORD, host=HOST, port=PORT)
     client.run()
